@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Reader - I Can Read Your Mind</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 MIND READER</h1>
+            <p class="subtitle">I will read your mind... Focus your thoughts</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Landing Screen -->
+            <div id="landing" class="screen active">
+                <p class="welcome-text">Welcome, mysterious thinker...</p>
+                <p class="instructions">Choose what you would like me to read:</p>
+                
+                <div class="button-grid">
+                    <button class="btn btn-large" onclick="startNumberGame()">
+                        🔢 Think of a Number
+                    </button>
+                    <button class="btn btn-large" onclick="startColorGame()">
+                        🎨 Pick a Color
+                    </button>
+                    <button class="btn btn-large" onclick="startShapeGame()">
+                        📐 Choose a Shape
+                    </button>
+                    <button class="btn btn-large" onclick="startAnimalGame()">
+                        🐾 Think of an Animal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Number Game -->
+            <div id="numberGame" class="screen">
+                <div class="game-content">
+                    <div class="thinking-phase">
+                        <h2>Think of a Number (1-10)</h2>
+                        <p>Concentrate hard. Picture it in your mind.</p>
+                        <p class="small-text">Don't tell me anything yet...</p>
+                        
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="numberProgress"></div>
+                        </div>
+                        
+                        <button class="btn btn-lg-primary" onclick="revealNumberGuess()">
+                            I've thought of one
+                        </button>
+                    </div>
+                    
+                    <div class="reveal-phase hidden" id="numberReveal">
+                        <p class="reading-text">Reading your mind...</p>
+                        <div class="thinking-animation">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <div class="guess-box" id="numberGuess"></div>
+                        <button class="btn btn-success" onclick="numberReaction()">
+                            That's Correct! 🎉
+                        </button>
+                        <button class="btn btn-secondary" onclick="numberMissed()">
+                            No, that's wrong
+                        </button>
+                    </div>
+
+                    <div class="explanation hidden" id="numberExplain">
+                        <p id="explainText"></p>
+                    </div>
+                </div>
+                <button class="btn btn-back" onclick="goHome()">← Back to Menu</button>
+            </div>
+
+            <!-- Color Game -->
+            <div id="colorGame" class="screen">
+                <div class="game-content">
+                    <div class="thinking-phase">
+                        <h2>Pick a Color</h2>
+                        <p>Look at these colors and choose one in your mind.</p>
+                        <div class="color-display">
+                            <div class="color-option red"></div>
+                            <div class="color-option blue"></div>
+                            <div class="color-option green"></div>
+                        </div>
+                        <p class="small-text">Choose... don't move your mouse... let me sense it...</p>
+                        
+                        <button class="btn btn-lg-primary" onclick="revealColorGuess()">
+                            I've Chosen
+                        </button>
+                    </div>
+                    
+                    <div class="reveal-phase hidden" id="colorReveal">
+                        <p class="reading-text">Sensing your choice...</p>
+                        <div class="thinking-animation">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <div class="guess-box" id="colorGuess"></div>
+                        <button class="btn btn-success" onclick="colorReaction()">
+                            Correct! 🎉
+                        </button>
+                        <button class="btn btn-secondary" onclick="colorMissed()">
+                            Wrong
+                        </button>
+                    </div>
+
+                    <div class="explanation hidden" id="colorExplain">
+                        <p id="colorExplainText"></p>
+                    </div>
+                </div>
+                <button class="btn btn-back" onclick="goHome()">← Back to Menu</button>
+            </div>
+
+            <!-- Shape Game -->
+            <div id="shapeGame" class="screen">
+                <div class="game-content">
+                    <div class="thinking-phase">
+                        <h2>Choose a Shape</h2>
+                        <p>Select one and visualize it in your mind.</p>
+                        <div class="shape-display">
+                            <svg class="shape" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <svg class="shape" viewBox="0 0 100 100">
+                                <polygon points="50,10 90,90 10,90" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <svg class="shape" viewBox="0 0 100 100">
+                                <rect x="20" y="20" width="60" height="60" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <p class="small-text">Circle • Triangle • Square</p>
+                        
+                        <button class="btn btn-lg-primary" onclick="revealShapeGuess()">
+                            Shape Selected
+                        </button>
+                    </div>
+                    
+                    <div class="reveal-phase hidden" id="shapeReveal">
+                        <p class="reading-text">Reading your geometric thoughts...</p>
+                        <div class="thinking-animation">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <div class="guess-box" id="shapeGuess"></div>
+                        <button class="btn btn-success" onclick="shapeReaction()">
+                            Yes! 🎉
+                        </button>
+                        <button class="btn btn-secondary" onclick="shapeMissed()">
+                            No
+                        </button>
+                    </div>
+
+                    <div class="explanation hidden" id="shapeExplain">
+                        <p id="shapeExplainText"></p>
+                    </div>
+                </div>
+                <button class="btn btn-back" onclick="goHome()">← Back to Menu</button>
+            </div>
+
+            <!-- Animal Game -->
+            <div id="animalGame" class="screen">
+                <div class="game-content">
+                    <div class="thinking-phase">
+                        <h2>Think of an Animal</h2>
+                        <p>Any animal. Keep it in your thoughts.</p>
+                        <p class="small-text">I'm already sensing something...</p>
+                        
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="animalProgress"></div>
+                        </div>
+                        
+                        <button class="btn btn-lg-primary" onclick="revealAnimalGuess()">
+                            I'm Ready
+                        </button>
+                    </div>
+                    
+                    <div class="reveal-phase hidden" id="animalReveal">
+                        <p class="reading-text">Connecting with your subconscious...</p>
+                        <div class="thinking-animation">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <div class="guess-box" id="animalGuess"></div>
+                        <button class="btn btn-success" onclick="animalReaction()">
+                            Spot On! 🎉
+                        </button>
+                        <button class="btn btn-secondary" onclick="animalMissed()">
+                            Not right
+                        </button>
+                    </div>
+
+                    <div class="explanation hidden" id="animalExplain">
+                        <p id="animalExplainText"></p>
+                    </div>
+                </div>
+                <button class="btn btn-back" onclick="goHome()">← Back to Menu</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>✨ All guesses are 100% scientifically accurate* 
+            <br><span class="small-text">*May not be scientifically accurate</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
